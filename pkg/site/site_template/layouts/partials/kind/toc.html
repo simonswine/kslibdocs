@@ -1,0 +1,9 @@
+{{ $.Scratch.Set "toc_current" (where .Site.Pages "Params.k8s_kind" .Params.current )}}
+ <ul>
+    {{ range where ($.Scratch.Get "toc_current") "Params.data_type" "ptMixin"}}
+        <li>
+            <a href="#{{ .Params.current }}">{{ .Params.title }}</a>
+            {{ partial "kind/toc.html" . }}
+        </li>
+    {{ end }}
+</ul>

@@ -1,0 +1,80 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
+@function gray($key: "100") {
+    @return map-get($grays, $key);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+    font-family: 'Raleway', sans-serif;
+    padding-top: 20px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: inherit;
+    font-family: "Raleway", "Open Sans", "sans-serif";
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.container.app {
+    padding-top: 50px;
+}
+
+table.group {
+    .kind {
+        word-wrap: break;
+    }
+}
+
+.kind-summary {
+    display: none;
+
+    &.default {
+        display: inline;
+    }
+}
+
+.toc {
+    top: 4rem;
+    padding-left: 12px;
+
+    ul {
+        padding-left: 12px;
+    }
+
+    li {
+        word-wrap: break-word;
+    }
+
+    a {
+        font-size: 12px;
+    }
+}
+
+.octicon {
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor;
+    width: 16px;
+    height: 16px;
+}
+
+a {
+    &[aria-expanded=true] .icon-chevron-right, &[aria-expanded=false] .icon-chevron-down {
+        display: none;
+    }
+}
+
+:target:before {
+    content:"";
+    display:block;
+    height: 5.5em;
+    margin:-5.5em 0 0;
+}
+
+#kind-sidebar {
+    position:fixed;
+    max-width: 16.7%;
+}

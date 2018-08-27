@@ -1,0 +1,59 @@
+{{ define "main" }}
+
+    {{ $.Scratch.Set "current" (where .Site.Pages "Params.k8s_kind" .Params.matcher) }}
+
+    <div class="row">
+        <div class="col-2">
+            <div class="col-12" id="kind-sidebar">
+                <h4>Mixins</h4>
+                <ul class="toc">
+                    {{ range where ($.Scratch.Get "current") "Params.data_type" "ptMixin" }}
+                        <li>
+                            <a href="#{{ .Params.current }}">{{ .Title }}</a>
+                            {{ partial "kind/toc.html" . }}
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+        <div class="col-10">
+            <h1>{{ .Title }}</h1>
+            {{ .Content }}
+
+            {{ $constuctors := where ($.Scratch.Get "current") "Params.data_type" "ptConstructor" }}
+            {{ if gt (len $constuctors) 0 }}
+                <h3>Constuctors</h3>
+                <ul>
+                    {{ range $constuctors  }}
+                        {{ partialCached "kind/entry_content.html" . .Params.current }}
+                    {{ end }}
+                </ul>
+            {{ end }}
+
+
+            {{ $functions := where ($.Scratch.Get "current") "Params.data_type" "ptFunction" }}
+            {{ if gt (len $functions) 0 }}
+                <h5>Functions</h5>
+                <ul>
+                    {{ range $functions  }}
+                        {{ partialCached "kind/entry_content.html" . .Params.current }}
+                    {{ end }}
+                </ul>
+            {{ end }}
+
+
+            {{ $mixins := where ($.Scratch.Get "current") "Params.data_type" "ptMixin" }}
+            {{ if gt (len $mixins) 0 }}
+                <h5>Mixins</h5>
+                <ul>
+                    {{ range $mixins  }}
+                        {{ partialCached "kind/entry_content.html" . .Params.current }}
+                    {{ end }}
+                </ul>
+            {{ end }}
+        </div>
+    </div>
+
+
+
+{{ end }}

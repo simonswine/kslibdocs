@@ -1,0 +1,23 @@
+<tr >
+    <td class="kind">{{ .Title }}</td>
+    <td class="versions">
+        {{ $parent := . }}
+        {{ range $i, $e := .Params.versions }}
+            {{ $path := (printf "%s/%s/%s" $parent.Params.parent_group $e $parent.Params.kind_name)}}
+            {{ if eq $i 0 }}
+                {{ $.Scratch.Set "badgeType" "badge-primary" }}
+            {{ else }}
+                {{ $.Scratch.Set "badgeType" "badge-secondary" }}
+            {{ end }}
+            {{ $id := (printf "kind-version-%s-%s" $parent.Params.parent_group $parent.Params.kind_name) }}
+            <div>
+                <a id="{{ $id }}" href="{{ printf "%s" $path | relURL}}" data-version="{{$e}}" class="kind-version badge {{ $.Scratch.Get "badgeType" }}">{{ . }}</a>
+            </div>
+        {{ end }}
+    </td>
+
+    <td>
+        {{ $id := (printf "summary-group-kind-%s-%s" .Params.parent_group .Params.kind_name) }}
+        <div id="{{ $id }}" class="summary">{{ .Content }}</div>
+    </td>
+</tr>

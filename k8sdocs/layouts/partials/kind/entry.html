@@ -1,0 +1,21 @@
+{{ $.Scratch.Set "current" (where .Site.Pages "Params.k8s_kind" .Params.current) }}
+
+{{ $functions := where ($.Scratch.Get "current") "Params.data_type" "ptFunction" }}
+{{ if gt (len $functions) 0 }}
+    <h5>Functions</h5>
+    <ul>
+        {{ range $functions  }}
+            {{ partialCached "kind/entry_content.html" . .Params.current }}
+        {{ end }}
+    </ul>
+{{ end }}
+
+{{ $mixins := where ($.Scratch.Get "current") "Params.data_type" "ptMixin" }}
+{{ if gt (len $mixins) 0 }}
+    <h5>Mixins</h5>
+    <ul>
+        {{ range $mixins }}
+            {{ partialCached "kind/entry_content.html" . .Params.current }}
+        {{ end }}
+    </ul>
+{{ end }}

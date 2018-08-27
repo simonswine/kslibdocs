@@ -1,0 +1,31 @@
+sudo: false
+language: go
+
+go:
+  - 1.9.x
+  - 1.10.x
+  - tip
+
+matrix:
+  allow_failures:
+    - go: tip
+
+before_script:
+  - go get -u github.com/golang/lint/golint
+
+script:
+  - go test -race -coverprofile=coverage.txt -covermode=atomic
+
+after_script:
+  - test -z "$(gofmt -s -l -w . | tee /dev/stderr)"
+  - test -z "$(golint ./...     | tee /dev/stderr)"
+  - go vet ./...
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+os:
+  - linux
+  - osx
+
+notifications:
+  email: false

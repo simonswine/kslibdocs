@@ -1,0 +1,18 @@
+<li>
+    <h5>
+        <a name="{{ .Params.current }}">
+            {{ .Title }}
+            <a data-toggle="collapse" href="#{{ .Params.current }}" role="button" aria-expanded="true">
+                <div class="octicon icon-chevron-right"></div>
+                <div class="octicon icon-chevron-down"></div>
+            </a>
+        </a>
+    </h5>
+
+    <div class="collapse show" id="{{ .Params.current }}">
+        {{ .Content }}
+
+        <hr>
+        {{ partial "kind/entry.html" .  }}
+    </div>
+</li>
