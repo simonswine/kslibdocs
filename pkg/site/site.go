@@ -8,10 +8,10 @@ import (
 	"path/filepath"
 
 	rice "github.com/GeertJohan/go.rice"
+	"github.com/gohugoio/hugo/commands"
 	rcopy "github.com/otiai10/copy"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/hugo/commands"
 )
 
 //go:generate rice embed-go
